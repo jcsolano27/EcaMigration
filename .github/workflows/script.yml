@@ -27,4 +27,4 @@ jobs:
       - name: Upload Script
         uses: actions/upload-artifact@v2
         with: 
-           path: Output/
+           path: Output/ECAPortalProd.zip

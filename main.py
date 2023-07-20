@@ -74,7 +74,7 @@ def zip_msapp(project_name, file_name):
     print(f"Moved: Input/msapp/{file_name}.zip into {fullpath}")
 
 def zip_app():
-    shutil.make_archive(f'Output/{path}', 'zip', f'Input/{path}')
+    shutil.make_archive(f'Output/ECAPortalProd', 'zip', f'Input/{path}')
     print(f'Zip file Output/{path} created.')
 
 def replace_file(file_path, find, replace):
