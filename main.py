@@ -7,7 +7,7 @@ import subprocess, sys
 msapp_paths = ['', 'Components', 'Controls', 'References', 'Resources']
 
 def get_zipfile():
-    for file in os.listdir(f'Input\\'):
+    for file in os.listdir(f'Input/'):
         if file[-4:] == '.zip':
             return file
 
@@ -16,66 +16,66 @@ def unzip_app(file):
 
     path = file.split(".")[0]
     if path in os.listdir("Input"):
-        shutil.rmtree(f'Input\\{path}')
-        print(f'Path: Input\\{path} removed')
+        shutil.rmtree(f'Input/{path}')
+        print(f'Path: Input/{path} removed')
 
-    with ZipFile(f'Input\\{file}', 'r') as zObject:
-        zObject.extractall(f"Input\\{path}")
-        print(f'Path: Input\\{path} created')
+    with ZipFile(f'Input/{file}', 'r') as zObject:
+        zObject.extractall(f"Input/{path}")
+        print(f'Path: Input/{path} created')
 
 def unzip_msapp(file):
 
-    filename = (msapp_path.split("\\")[-1:])[0][:-6]
+    filename = (msapp_path.split("/")[-1:])[0][:-6]
 
     if 'msapp' in os.listdir("Input"):
-        shutil.rmtree('Input\\msapp')
-        print(f'Path: Input\\msapp removed')
-    os.mkdir('Input\\msapp')
+        shutil.rmtree('Input/msapp')
+        print(f'Path: Input/msapp removed')
+    os.mkdir('Input/msapp')
 
     with ZipFile(file, 'r') as zObject:
-        zObject.extractall(f'Input\\msapp\\{filename}')
-        print(f'Path: Input\\msapp created')
+        zObject.extractall(f'Input/msapp/{filename}')
+        print(f'Path: Input/msapp created')
 
 def extract_msapp(file):
-    filename = (msapp_path.split("\\")[-1:])[0]
+    filename = (msapp_path.split("/")[-1:])[0]
 
     if 'msapp' in os.listdir("Input"):
-        shutil.rmtree('Input\\msapp')
-        print(f'Path: Input\\msapp removed')
-    os.mkdir('Input\\msapp')
+        shutil.rmtree('Input/msapp')
+        print(f'Path: Input/msapp removed')
+    os.mkdir('Input/msapp')
 
-    os.rename(file, f'Input\\msapp\\{filename}')
-    print(f"File {file} moved into Input\\msapp\\{filename}")
+    os.rename(file, f'Input/msapp/{filename}')
+    print(f"File {file} moved into Input/msapp/{filename}")
     os.system('extract.bat')
 
 def compress_msapp(file):
-    filename = (msapp_path.split("\\")[-1:])[0]
+    filename = (msapp_path.split("/")[-1:])[0]
     os.system('compress.bat')
 
-    os.rename(f'Input\\msapp\\NewMSAPP\\{filename}', file)
-    print(f"FileInput\\msapp\\NewMSAPP\\{filename} moved into {file}")
+    os.rename(f'Input/msapp/NewMSAPP/{filename}', file)
+    print(f"FileInput/msapp/NewMSAPP/{filename} moved into {file}")
 
 def getMsapp(project_name):
-    app_folder = os.listdir(f'Input\\{project_name}\\Microsoft.PowerApps\\Apps')[0]
-    for file in os.listdir(f'Input\\{project_name}\\Microsoft.PowerApps\\apps\\{app_folder}'):
+    app_folder = os.listdir(f'Input/{project_name}/Microsoft.PowerApps/Apps')[0]
+    for file in os.listdir(f'Input/{project_name}/Microsoft.PowerApps/apps/{app_folder}'):
         if file[-6:] == '.msapp':
-            return f'Input\\{project_name}\\Microsoft.PowerApps\\apps\\{app_folder}\\{file}'
+            return f'Input/{project_name}/Microsoft.PowerApps/apps/{app_folder}/{file}'
 
 def zip_msapp(project_name, file_name):
 
-    shutil.make_archive(f'Input\\msapp\\{file_name}', 'zip', f'Input\\msapp\\{file_name}')
-    app_folder = os.listdir(f'Input\\{project_name}\\Microsoft.PowerApps\\Apps')[0]
-    fullpath = f'Input\\{project_name}\\Microsoft.PowerApps\\apps\\{app_folder}\\{file_name}.msapp'
+    shutil.make_archive(f'Input/msapp/{file_name}', 'zip', f'Input/msapp/{file_name}')
+    app_folder = os.listdir(f'Input/{project_name}/Microsoft.PowerApps/Apps')[0]
+    fullpath = f'Input/{project_name}/Microsoft.PowerApps/apps/{app_folder}/{file_name}.msapp'
 
     os.remove(fullpath)
     print(f"Removed: {fullpath}")
 
-    os.rename(f'Input\\msapp\\{file_name}.zip', fullpath)
-    print(f"Moved: Input\\msapp\\{file_name}.zip into {fullpath}")
+    os.rename(f'Input/msapp/{file_name}.zip', fullpath)
+    print(f"Moved: Input/msapp/{file_name}.zip into {fullpath}")
 
 def zip_app():
-    shutil.make_archive(f'Output\\{path}', 'zip', f'Input\\{path}')
-    print(f'Zip file Output\\{path} created.')
+    shutil.make_archive(f'Output/{path}', 'zip', f'Input/{path}')
+    print(f'Zip file Output/{path} created.')
 
 def replace_file(file_path, find, replace):
 
@@ -89,10 +89,10 @@ def replace_file(file_path, find, replace):
 
 def msapp_replace(file_name, find, replace, exclude=[]):
     for mpath in msapp_paths:
-        full_path = f'Input\\msapp\\{file_name}\\{mpath}'
+        full_path = f'Input/msapp/{file_name}/{mpath}'
         for file in os.listdir(full_path):
             if file[-5:] == '.json' and file not in exclude:
-                full_file_path = f'{full_path}\\{file}'
+                full_file_path = f'{full_path}/{file}'
                 replace_file(full_file_path, find, replace)
 
 def full_replace():
@@ -103,7 +103,7 @@ def full_replace():
             replace = parts[2].strip()
             # print(f'find: {find} - replace: {replace}')
             msapp_replace(msapp_file, find, replace)
-            replace_file(f'Input\\{path}\\Microsoft.PowerApps\\Apps\\{app_folder}\\{app_folder}.json', find, replace)
+            replace_file(f'Input/{path}/Microsoft.PowerApps/Apps/{app_folder}/{app_folder}.json', find, replace)
 
 def dynamic_replace():
     with open('DinamicSwitch.csv', 'r') as v:
@@ -125,7 +125,7 @@ def variable_replace():
 
 
 def replace_regex(source):
-    controls = f"Input\\msapp\\{os.listdir('Input/msapp')[0]}\\Controls"
+    controls = f"Input/msapp/{os.listdir('Input/msapp')[0]}/Controls"
     pattern = fr'"(?:[^"\\]|\\.)*{source}(?:[^"\\]|\\.)*"'
     if_statement = 'If(varEnv=\\"DEV\\",{0},{1})'
 
@@ -148,7 +148,7 @@ def replace_regex(source):
                             sfile = sfile.replace(match, transformed)
             except:
                 pass
-        with open(f"{controls}\\{file}", "w") as f:
+        with open(f"{controls}/{file}", "w") as f:
             f.write(sfile)
 
 def full_regex():
@@ -160,17 +160,17 @@ def full_regex():
             replace_regex(find)
 
 
-#app_zip = get_zipfile()  # ECAPortal_20230627195436.zip
-#path = app_zip.split(".")[0]  # ECAPortal_20230627195436
-#unzip_app(app_zip)
+app_zip = get_zipfile()  # ECAPortal_20230627195436.zip
+path = app_zip.split(".")[0]  # ECAPortal_20230627195436
+unzip_app(app_zip)
 
 print(os.listdir())
 print(os.listdir('Input'))
 print(os.listdir('Input/'))
-#app_folder = os.listdir(f'Input\\{path}\\Microsoft.PowerApps\\Apps')[0]  # 4568856658079073990
+#app_folder = os.listdir(f'Input/{path}/Microsoft.PowerApps/Apps')[0]  # 4568856658079073990
 
 #msapp_path = getMsapp(path)
-#msapp_file = (msapp_path.split("\\")[-1:])[0][:-6]
+#msapp_file = (msapp_path.split("/")[-1:])[0][:-6]
 #extract_msapp(msapp_path)
 
 #full_replace()
