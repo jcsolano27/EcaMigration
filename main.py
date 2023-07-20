@@ -56,7 +56,12 @@ def compress_msapp(file):
     print(f"FileInput/msapp/NewMSAPP/{filename} moved into {file}")
 
 def getMsapp(project_name):
+    print("paths: ")
+    print(os.listdir(f'Input/{project_name}/'))
+    print(os.listdir(f'Input/{project_name}/Microsoft.PowerApps'))
+    print(os.listdir(f'Input/{project_name}/Microsoft.PowerApps/Apps'))
     app_folder = os.listdir(f'Input/{project_name}/Microsoft.PowerApps/Apps')[0]
+
     for file in os.listdir(f'Input/{project_name}/Microsoft.PowerApps/apps/{app_folder}'):
         if file[-6:] == '.msapp':
             return f'Input/{project_name}/Microsoft.PowerApps/apps/{app_folder}/{file}'
