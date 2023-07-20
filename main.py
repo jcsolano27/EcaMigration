@@ -165,15 +165,15 @@ path = app_zip.split(".")[0]  # ECAPortal_20230627195436
 unzip_app(app_zip)
 app_folder = os.listdir(f'Input\\{path}\\Microsoft.PowerApps\\Apps')[0]  # 4568856658079073990
 
-msapp_path = getMsapp(path)
-msapp_file = (msapp_path.split("\\")[-1:])[0][:-6]
-extract_msapp(msapp_path)
+#msapp_path = getMsapp(path)
+#msapp_file = (msapp_path.split("\\")[-1:])[0][:-6]
+#extract_msapp(msapp_path)
 
-full_replace()
+#full_replace()
 #dynamic_replace()
 #variable_replace()
 
 #full_regex()
 
-compress_msapp(msapp_path)
-zip_app()
+#compress_msapp(msapp_path)
+#zip_app()
