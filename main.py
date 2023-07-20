@@ -164,10 +164,7 @@ app_zip = get_zipfile()  # ECAPortal_20230627195436.zip
 path = app_zip.split(".")[0]  # ECAPortal_20230627195436
 unzip_app(app_zip)
 
-print(os.listdir())
-print(os.listdir('Input'))
-print(os.listdir('Input/'))
-#app_folder = os.listdir(f'Input/{path}/Microsoft.PowerApps/Apps')[0]  # 4568856658079073990
+app_folder = os.listdir(f'Input/{path}/Microsoft.PowerApps/Apps')[0]  # 4568856658079073990
 
 #msapp_path = getMsapp(path)
 #msapp_file = (msapp_path.split("/")[-1:])[0][:-6]
@@ -180,4 +177,4 @@ print(os.listdir('Input/'))
 #full_regex()
 
 #compress_msapp(msapp_path)
-#zip_app()
+zip_app()
