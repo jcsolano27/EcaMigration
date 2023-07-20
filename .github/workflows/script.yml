@@ -23,12 +23,15 @@ jobs:
       # Runs a single command using the runners shell
       - name: Run a Python Script
         run: python main.py
-  
-      - name: Upload Script
-        uses: actions/upload-artifact@v2
-        with: 
-           path: Output/ECAPortalProd.zip
-           
+
       - name: Script
         run: ./script.ps1
         shell: pwsh
+
+      - name: Run a Python Replace
+        run: python Replace.py
+
+      - name: Upload Script
+        uses: actions/upload-artifact@v2
+        with:
+          path: Output/ECAPortalProd.zip

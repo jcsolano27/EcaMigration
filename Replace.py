@@ -46,6 +46,7 @@ def extract_msapp(file):
 
     os.rename(file, f'Input/msapp/{filename}')
     print(f"File {file} moved into Input/msapp/{filename}")
+    #os.system('extract.bat')
 
 def compress_msapp(file):
     filename = (msapp_path.split("/")[-1:])[0]
@@ -55,10 +56,6 @@ def compress_msapp(file):
     print(f"FileInput/msapp/NewMSAPP/{filename} moved into {file}")
 
 def getMsapp(project_name):
-    print("paths: ")
-    print(os.listdir(f'Input/{project_name}/'))
-    print(os.listdir(f'Input/{project_name}/Microsoft.PowerApps/'))
-    print(os.listdir(f'Input/{project_name}/Microsoft.PowerApps/apps/'))
     app_folder = os.listdir(f'Input/{project_name}/Microsoft.PowerApps/apps/')[0]
 
     for file in os.listdir(f'Input/{project_name}/Microsoft.PowerApps/apps/{app_folder}'):
@@ -166,24 +163,24 @@ def full_regex():
 
 app_zip = get_zipfile()  # ECAPortal_20230627195436.zip
 path = app_zip.split(".")[0]  # ECAPortal_20230627195436
-unzip_app(app_zip)
-
-
+#unzip_app(app_zip)
 #print(os.listdir(f'Input/{path}/'))
 app_folder = os.listdir(f'Input/{path}/Microsoft.PowerApps/apps')[0]  # 4568856658079073990
 #print(os.listdir(f'Input/{path}/Microsoft.PowerApps'))
 #print(os.listdir(f'Input/{path}/Microsoft.PowerApps/apps'))
 
+print(path)
 
 msapp_path = getMsapp(path)
+print(msapp_path)
 msapp_file = (msapp_path.split("/")[-1:])[0][:-6]
-extract_msapp(msapp_path)
+#extract_msapp(msapp_path)
 print(msapp_file)
-#os.system('extract.bat')
+variable_replace()
 
 #full_replace()
 #dynamic_replace()
-#variable_replace()
+
 
 #full_regex()
 

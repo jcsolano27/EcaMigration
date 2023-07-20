@@ -3,3 +3,5 @@ Input/ECAPortalDev_20230706223439/Microsoft.PowerApps/apps/7954483590859243075/7
 Input/ECAPortalDev_20230706223439/manifest.json
 Input/ECAPortalDev_20230706223439/Microsoft.PowerApps/apps/7954483590859243075/N19c6d062-0a70-479b-85a1-0036c1caf5e2-logoSmallFile
 Input/msapp/N4cedf8b5-67d6-4f60-8b9b-038e6863de57-document.msapp
+extract.bat
+msappExtract.ps1
