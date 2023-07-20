@@ -165,7 +165,8 @@ def full_regex():
 #unzip_app(app_zip)
 
 print(os.listdir())
-print(os.listdir('Input\\'))
+print(os.listdir('Input'))
+print(os.listdir('Input/'))
 #app_folder = os.listdir(f'Input\\{path}\\Microsoft.PowerApps\\Apps')[0]  # 4568856658079073990
 
 #msapp_path = getMsapp(path)
