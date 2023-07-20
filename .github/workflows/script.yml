@@ -23,3 +23,8 @@ jobs:
       # Runs a single command using the runners shell
       - name: Run a Python Script
         run: python main.py
+  
+      - name: Upload Script
+        uses: actions/upload-artifact@v2
+        with: 
+           path: Output/
