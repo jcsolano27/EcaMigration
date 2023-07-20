@@ -59,8 +59,8 @@ def getMsapp(project_name):
     print("paths: ")
     print(os.listdir(f'Input/{project_name}/'))
     print(os.listdir(f'Input/{project_name}/Microsoft.PowerApps/'))
-    print(os.listdir(f'Input/{project_name}/Microsoft.PowerApps/Apps/'))
-    app_folder = os.listdir(f'Input/{project_name}/Microsoft.PowerApps/Apps/')[0]
+    print(os.listdir(f'Input/{project_name}/Microsoft.PowerApps/apps/'))
+    app_folder = os.listdir(f'Input/{project_name}/Microsoft.PowerApps/apps/')[0]
 
     for file in os.listdir(f'Input/{project_name}/Microsoft.PowerApps/apps/{app_folder}'):
         if file[-6:] == '.msapp':
@@ -69,7 +69,7 @@ def getMsapp(project_name):
 def zip_msapp(project_name, file_name):
 
     shutil.make_archive(f'Input/msapp/{file_name}', 'zip', f'Input/msapp/{file_name}')
-    app_folder = os.listdir(f'Input/{project_name}/Microsoft.PowerApps/Apps')[0]
+    app_folder = os.listdir(f'Input/{project_name}/Microsoft.PowerApps/apps')[0]
     fullpath = f'Input/{project_name}/Microsoft.PowerApps/apps/{app_folder}/{file_name}.msapp'
 
     os.remove(fullpath)
@@ -108,7 +108,7 @@ def full_replace():
             replace = parts[2].strip()
             # print(f'find: {find} - replace: {replace}')
             msapp_replace(msapp_file, find, replace)
-            replace_file(f'Input/{path}/Microsoft.PowerApps/Apps/{app_folder}/{app_folder}.json', find, replace)
+            replace_file(f'Input/{path}/Microsoft.PowerApps/apps/{app_folder}/{app_folder}.json', find, replace)
 
 def dynamic_replace():
     with open('DinamicSwitch.csv', 'r') as v:
