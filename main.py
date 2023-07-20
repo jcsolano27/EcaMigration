@@ -170,6 +170,8 @@ app_folder = os.listdir(f'Input/{path}/Microsoft.PowerApps/apps')[0]  # 45688566
 print(os.listdir(f'Input/{path}/Microsoft.PowerApps'))
 print(os.listdir(f'Input/{path}/Microsoft.PowerApps/apps'))
 
+
+
 #msapp_path = getMsapp(path)
 #msapp_file = (msapp_path.split("/")[-1:])[0][:-6]
 #extract_msapp(msapp_path)
