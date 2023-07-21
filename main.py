@@ -182,7 +182,7 @@ def main():
 
     elif value == 1:
         print("Started replace process")
-        os.system('extract.bat')
+        #os.system('extract.bat')
         items = os.listdir('Input')
 
         path = os.listdir('Input')[0]
@@ -192,7 +192,7 @@ def main():
         app_folder = os.listdir(f'Input/{path}/Microsoft.PowerApps/apps')[0]  # 4568856658079073990
         msapp_file = os.listdir('Input/msapp')[0]
         dynamic_replace(msapp_file)
-        os.system('compress.bat')
+        #os.system('compress.bat')
     else:
         print("Started compress process")
         path = os.listdir('Input')[0]
