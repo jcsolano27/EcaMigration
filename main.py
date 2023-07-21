@@ -79,7 +79,7 @@ def zip_msapp(project_name, file_name):
 
 def zip_app(path):
     shutil.make_archive(f'Output/ECAPortalProd', 'zip', f'Input/{path}')
-    print(f'Zip file Output/{path} created.')
+    print(f'Zip file Output/ECAPortalProd created.')
 
 def replace_file(file_path, find, replace):
 
