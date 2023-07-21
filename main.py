@@ -187,7 +187,7 @@ def main():
 
         for item in items:
             if item != "msapp" and item[-4:] == ".zip":
-                path = path[:-4]
+                path = item[:-4]
 
         app_folder = os.listdir(f'Input/{path}/Microsoft.PowerApps/apps')[0]  # 4568856658079073990
         msapp_file = os.listdir('Input/msapp')[0]
@@ -199,7 +199,7 @@ def main():
 
         for item in items:
             if item != "msapp" and item[-4:] == ".zip":
-                path = path[:-4]
+                path = item[:-4]
 
         app_folder = os.listdir(f'Input/{path}/Microsoft.PowerApps/apps')[0]  # 4568856658079073990
         print(app_folder)
