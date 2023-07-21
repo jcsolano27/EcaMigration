@@ -25,21 +25,21 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Unzip Portal Development Project
-        run: python main.py 0 
+        run: python main.py 99
     
-      - name: msappExtract
-        run: ./msappExtract.ps1
-        shell: pwsh
+      #- name: msappExtract
+      #  run: ./msappExtract.ps1
+      #  shell: pwsh
        
-      - name: Replace Development Values
-        run: python main.py 1 
+      #- name: Replace Development Values
+      #  run: python main.py 1 
         
-      - name: msappCompress
-        run: ./msappCompress.ps1
-        shell: pwsh
+      #- name: msappCompress
+      #  run: ./msappCompress.ps1
+      #  shell: pwsh
         
-      - name: Compress Production Values
-        run: python main.py 2 
+      #- name: Compress Production Values
+      #  run: python main.py 2 
         
       - name: Export Production Portal
         uses: actions/upload-artifact@v2
