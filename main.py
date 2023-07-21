@@ -185,9 +185,9 @@ def main():
         #os.system('extract.bat')
         items = os.listdir('Input')
 
-        path = os.listdir('Input')[0]
-        if path[-4:] == ".zip":
-            path = path[:-4]
+        for item in items:
+            if item != "msapp" and path[-4:] == ".zip":
+                path = path[:-4]
 
         app_folder = os.listdir(f'Input/{path}/Microsoft.PowerApps/apps')[0]  # 4568856658079073990
         msapp_file = os.listdir('Input/msapp')[0]
@@ -195,9 +195,11 @@ def main():
         #os.system('compress.bat')
     else:
         print("Started compress process")
-        path = os.listdir('Input')[0]
-        if path[-4:] == ".zip":
-            path = path[:-4]
+        items = os.listdir('Input')
+
+        for item in items:
+            if item != "msapp" and path[-4:] == ".zip":
+                path = path[:-4]
 
         app_folder = os.listdir(f'Input/{path}/Microsoft.PowerApps/apps')[0]  # 4568856658079073990
         print(app_folder)
