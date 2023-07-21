@@ -2,7 +2,7 @@ import os
 import shutil
 from zipfile import ZipFile
 import re
-import subprocess, sys
+import sys
 
 msapp_paths = ['', 'Components', 'Controls', 'References', 'Resources']
 
@@ -37,7 +37,7 @@ def unzip_msapp(file):
         print(f'Path: Input/msapp created')
 
 def extract_msapp(file):
-    filename = (msapp_path.split("/")[-1:])[0]
+    filename = (file.split("/")[-1:])[0]
 
     if 'msapp' in os.listdir("Input"):
         shutil.rmtree('Input/msapp')
@@ -47,7 +47,7 @@ def extract_msapp(file):
     os.rename(file, f'Input/msapp/{filename}')
     print(f"File {file} moved into Input/msapp/{filename}")
 
-def compress_msapp(file):
+def compress_msapp(file, msapp_path):
     filename = (msapp_path.split("/")[-1:])[0]
     os.system('compress.bat')
 
@@ -77,7 +77,7 @@ def zip_msapp(project_name, file_name):
     os.rename(f'Input/msapp/{file_name}.zip', fullpath)
     print(f"Moved: Input/msapp/{file_name}.zip into {fullpath}")
 
-def zip_app():
+def zip_app(path):
     shutil.make_archive(f'Output/ECAPortalProd', 'zip', f'Input/{path}')
     print(f'Zip file Output/{path} created.')
 
@@ -109,16 +109,16 @@ def full_replace():
             msapp_replace(msapp_file, find, replace)
             replace_file(f'Input/{path}/Microsoft.PowerApps/apps/{app_folder}/{app_folder}.json', find, replace)
 
-def dynamic_replace():
+def dynamic_replace(msapp_file):
     with open('DinamicSwitch.csv', 'r') as v:
         for line in v.readlines()[1:]:
             parts = line.split(",")
             find = parts[1].strip()
             replace = parts[2].strip()
-            # print(f'find: {find} - replace: {replace}')
+            print(f'find: {find} - replace: {replace}')
             msapp_replace(msapp_file, find, replace, exclude=['DataSources.json', 'Properties.json'])
 
-def variable_replace():
+def variable_replace(msapp_file):
     with open('mapping.csv', 'r') as v:
         for line in v.readlines()[1:]:
             parts = line.split(",")
@@ -164,28 +164,38 @@ def full_regex():
             replace_regex(find)
 
 
-app_zip = get_zipfile()  # ECAPortal_20230627195436.zip
-path = app_zip.split(".")[0]  # ECAPortal_20230627195436
-unzip_app(app_zip)
+def main():
 
+    value = 3
+    if len(sys.argv) > 1:
+        print(sys.argv[1])
+        value = sys.argv[1]
 
-#print(os.listdir(f'Input/{path}/'))
-app_folder = os.listdir(f'Input/{path}/Microsoft.PowerApps/apps')[0]  # 4568856658079073990
-#print(os.listdir(f'Input/{path}/Microsoft.PowerApps'))
-#print(os.listdir(f'Input/{path}/Microsoft.PowerApps/apps'))
+    if value == 0:
+        app_zip = get_zipfile()  # ECAPortal_20230627195436.zip
+        path = app_zip.split(".")[0]  # ECAPortal_20230627195436
+        unzip_app(app_zip)
+        msapp_path = getMsapp(path)
+        msapp_file = (msapp_path.split("/")[-1:])[0][:-6]
+        extract_msapp(msapp_path)
+        print(msapp_file)
 
+    elif value == 1:
+        os.system('extract.bat')
+        path = os.listdir('Input')[0]
+        app_folder = os.listdir(f'Input/{path}/Microsoft.PowerApps/apps')[0]  # 4568856658079073990
+        msapp_file = os.listdir('Input/msapp')[0]
+        dynamic_replace(msapp_file)
+        os.system('compress.bat')
+    else:
+        path = os.listdir('Input')[0]
+        app_folder = os.listdir(f'Input/{path}/Microsoft.PowerApps/apps')[0]  # 4568856658079073990
+        print(app_folder)
+        msapp_file = os.listdir('Input/msapp/NewMSAPP')[0]
+        new_msapp_path = f'Input/{path}/Microsoft.PowerApps/apps/{app_folder}/{msapp_file}'
+        os.rename(f'Input/msapp/NewMSAPP/{msapp_file}', new_msapp_path)
+        print(f"FileInput/msapp/NewMSAPP/{msapp_file} moved into {new_msapp_path}")
+        zip_app(path)
 
-msapp_path = getMsapp(path)
-msapp_file = (msapp_path.split("/")[-1:])[0][:-6]
-extract_msapp(msapp_path)
-print(msapp_file)
-#os.system('extract.bat')
-
-#full_replace()
-#dynamic_replace()
-#variable_replace()
-
-#full_regex()
-
-#compress_msapp(msapp_path)
-#zip_app()
+if __name__ == '__main__':
+    main()
