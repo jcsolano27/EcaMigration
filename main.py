@@ -165,12 +165,13 @@ def full_regex():
 
 
 def main():
-
+    value = 0
     if len(sys.argv) > 1:
         print(sys.argv[1])
-        value = sys.argv[1]
+        value = int(sys.argv[1])
 
     if value == 0:
+        print("Started Unzip process")
         app_zip = get_zipfile()  # ECAPortal_20230627195436.zip
         path = app_zip.split(".")[0]  # ECAPortal_20230627195436
         unzip_app(app_zip)
@@ -180,6 +181,7 @@ def main():
         print(msapp_file)
 
     elif value == 1:
+        print("Started replace process")
         os.system('extract.bat')
         items = os.listdir('Input')
 
@@ -192,9 +194,10 @@ def main():
         dynamic_replace(msapp_file)
         os.system('compress.bat')
     else:
+        print("Started compress process")
         path = os.listdir('Input')[0]
         if path[-4:] == ".zip":
-            path = path[:-4] 
+            path = path[:-4]
 
         app_folder = os.listdir(f'Input/{path}/Microsoft.PowerApps/apps')[0]  # 4568856658079073990
         print(app_folder)
