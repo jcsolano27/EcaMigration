@@ -6,3 +6,11 @@ Input/msapp/N4cedf8b5-67d6-4f60-8b9b-038e6863de57-document.msapp
 extract.bat
 compress.bat
 .idea/workspace.xml
+*.json
+Input/ECAPortalDev_20230721181511/Microsoft.PowerApps/apps/7954483590859243075/N1b1d6c2f-b27e-4a74-a47a-93bec99504ad-logoSmallFile
+*.png
+*.jpg
+*.SVG
+*.sarif
+Output/ECAPortalProd.zip
+Input/ECAPortalDev_20230721181511/Microsoft.PowerApps/apps/7954483590859243075/N4d4d93ac-9a7b-4607-b833-35cdbfb07170-document.msapp

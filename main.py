@@ -55,10 +55,6 @@ def compress_msapp(file, msapp_path):
     print(f"FileInput/msapp/NewMSAPP/{filename} moved into {file}")
 
 def getMsapp(project_name):
-    print("paths: ")
-    print(os.listdir(f'Input/{project_name}/'))
-    print(os.listdir(f'Input/{project_name}/Microsoft.PowerApps/'))
-    print(os.listdir(f'Input/{project_name}/Microsoft.PowerApps/apps/'))
     app_folder = os.listdir(f'Input/{project_name}/Microsoft.PowerApps/apps/')[0]
 
     for file in os.listdir(f'Input/{project_name}/Microsoft.PowerApps/apps/{app_folder}'):
@@ -165,12 +161,12 @@ def full_regex():
 
 
 def main():
-    value = 0
+    value = 99
     if len(sys.argv) > 1:
-        print(sys.argv[1])
+        #print(sys.argv[1])
         value = int(sys.argv[1])
 
-    if value == 0:
+    if value == 0 or value == 99:
         print("Started Unzip process")
         app_zip = get_zipfile()  # ECAPortal_20230627195436.zip
         path = app_zip.split(".")[0]  # ECAPortal_20230627195436
@@ -180,9 +176,12 @@ def main():
         extract_msapp(msapp_path)
         print(msapp_file)
 
-    elif value == 1:
+    if value == 1 or value == 99:
         print("Started replace process")
-        #os.system('extract.bat')
+
+        if value == 99:
+            os.system('extract.bat')
+
         items = os.listdir('Input')
 
         for item in items:
@@ -192,8 +191,11 @@ def main():
         app_folder = os.listdir(f'Input/{path}/Microsoft.PowerApps/apps')[0]  # 4568856658079073990
         msapp_file = os.listdir('Input/msapp')[0]
         dynamic_replace(msapp_file)
-        #os.system('compress.bat')
-    else:
+
+        if value == 99:
+            os.system('compress.bat')
+
+    if value == 2 or value == 99:
         print("Started compress process")
         items = os.listdir('Input')
 
