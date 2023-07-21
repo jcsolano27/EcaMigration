@@ -43,7 +43,7 @@ jobs:
         with: 
            path: Output/ECAPortalProd.zip
       - name: Tag
-        if: startsWith(github.ref, 'refs/heads/release/')
+#       if: startsWith(github.ref, 'refs/heads/release/')
         run: |
           git tag "v$env:GitVersion_SemVer"
           git push origin "v$env:GitVersion_SemVer"
