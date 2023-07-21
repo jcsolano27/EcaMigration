@@ -42,4 +42,8 @@ jobs:
         uses: actions/upload-artifact@v2
         with: 
            path: Output/ECAPortalProd.zip
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+            files: Output/ECAPortalProd.zip
          
